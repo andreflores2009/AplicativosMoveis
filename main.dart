@@ -3,7 +3,7 @@ import 'exemplos/exemplo01_stateless.dart';
 import 'exemplos/exemplo02_stateful.dart';
 import 'exemplos/exemplo03_formulario.dart'; // Novo import
 import 'exemplos/exemplo04_cadastro.dart'; // Novo import
-import 'exemplos/exemplo05_listar.dart'; // Novo import
+//preencher o import de listar
 
 void main() {
   runApp(const MyApp());
@@ -23,12 +23,7 @@ class MyApp extends StatelessWidget {
         '/segunda': (context) => const SegundaTela(), // Segunda tela
         '/formulario': (context) => const FormularioBasicoPage(), // Nova tela de formulário
         '/cadastro': (context) => const CadastroClientePage(), // Nova rota de cadastro
-        /*
-        '/listar': (context) => Scaffold( // Placeholder provisório para Listar
-        appBar: AppBar(title: const Text('Listar Clientes')),
-          body: const Center(child: Text('Tela de Listagem ainda a fazer...')),
-        ), */
-        '/listar': (context) => const ListarClientesPage(), // ← aqui!
+        // preencher a rota de listar
 
       },
     );
