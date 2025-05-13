@@ -47,12 +47,7 @@ class PrimeiraTela extends StatelessWidget {
             ),
 
           const SizedBox(height: 20), // Espaço entre os botões
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/cadastro'); // Ir para o Formulário
-              },
-              child: const Text('Ir para Cadastrar'),
-            ),
+            const Text('Colocar um botão aqui para ir para o Cadastrar'),
 
 
           ],
