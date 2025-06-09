@@ -1,102 +1,83 @@
-// Importa o React e o hook useState para gerenciamento de estado
 import React, { useState } from 'react';
-
-// Importa os componentes visuais básicos do React Native
 import {
   View,
   Text,
   TextInput,
   Button,
-  FlatList,
+  ScrollView,
   StyleSheet
 } from 'react-native';
 
-// Função principal do aplicativo (componente funcional)
 export default function App() {
-  // Estado que armazena o nome digitado pelo usuário
+  // 1. Estado para texto digitado
   const [nome, setNome] = useState('');
-
-  // Estado que armazena a lista de contatos
+  // 2. Estado para lista de contatos
   const [contatos, setContatos] = useState([]);
-
-  // Estado que armazena o próximo ID a ser atribuído (começa em 1)
+  // 3. Estado para gerar IDs sequenciais
   const [proximoId, setProximoId] = useState(1);
 
-  // Função que é chamada quando o botão "Adicionar" é pressionado
-  const adicionarContato = () => {
-    // Ignora se o campo estiver em branco
-    if (nome.trim() === '') return;
+  // 4. Função acionada pelo botão
+  function adicionarContato() {
+    if (nome.trim() === '') return;      // 4.1. Se vazio, não faz nada
+    const novo = { id: proximoId, nome }; // 4.2. Cria objeto contato
+    setContatos(contatos.concat(novo));   // 4.3. Adiciona ao array
+    setProximoId(proximoId + 1);          // 4.4. Incrementa ID
+    setNome('');                          // 4.5. Limpa o campo
+  }
 
-    // Cria um novo objeto de contato com ID numérico sequencial
-    const novoContato = {
-      id: proximoId.toString(),  // converte o número em string para usar como key
-      nome: nome                 // nome digitado pelo usuário
-    };
-
-    // Adiciona o novo contato à lista existente
-    setContatos([...contatos, novoContato]);
-
-    // Atualiza o próximo ID para o valor seguinte
-    setProximoId(proximoId + 1);
-
-    // Limpa o campo de texto
-    setNome('');
-  };
-
-  // Estrutura visual do aplicativo
   return (
     <View style={styles.container}>
-      {/* Título da aplicação */}
+      {/* 5. Título da aplicação */}
       <Text style={styles.titulo}>Lista de Contatos</Text>
 
-      {/* Campo de entrada de texto */}
+      {/* 6. Campo de entrada de texto */}
       <TextInput
         style={styles.input}
         placeholder="Digite um nome"
         value={nome}
-        onChangeText={setNome}  // atualiza o estado nome enquanto o usuário digita
+        onChangeText={texto => setNome(texto)}
       />
 
-      {/* Botão para adicionar contato */}
+      {/* 7. Botão para adicionar contato */}
       <Button
         title="Adicionar"
-        onPress={adicionarContato} // chama a função ao clicar
+        onPress={adicionarContato}
       />
 
-      {/* Lista dos contatos adicionados */}
-      <FlatList
-        data={contatos}                         // array de contatos
-        keyExtractor={item => item.id}          // define o ID como chave única
-        renderItem={({ item }) => (
-          // exibe ID e nome do contato
-		  <Text style={styles.item}>
-            {item.id} - {item.nome}             
+      {/* 8. Lista rolável de contatos */}
+      <ScrollView style={styles.lista}>
+        {contatos.map(contato => (
+          <Text key={contato.id} style={styles.item}>
+            {/* 8.1. Exibe ID e nome */}
+            {contato.id} - {contato.nome}
           </Text>
-        )}
-      />
+        ))}
+      </ScrollView>
     </View>
   );
 }
 
-// Estilos da aplicação (semelhante ao CSS)
 const styles = StyleSheet.create({
   container: {
-    flex: 1,              // ocupa toda a tela disponível
-    padding: 20,          // espaçamento interno
-    marginTop: 40         // margem superior
+    flex: 1,          // ocupa tela inteira
+    padding: 20,      // espaçamento interno
+    marginTop: 40     // afasta da status bar
   },
   titulo: {
-    fontSize: 24,         // tamanho da fonte do título
-    marginBottom: 10      // espaço abaixo do título
+    fontSize: 24,     // tamanho do título
+    marginBottom: 10  // espaço abaixo
   },
   input: {
-    borderWidth: 1,       // borda visível
-    borderColor: '#ccc',  // cor da borda
-    padding: 10,          // espaço interno no campo
-    marginBottom: 10      // espaço abaixo do campo
+    borderWidth: 1,   // borda fina
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 10
+  },
+  lista: {
+    marginTop: 10     // espaço antes da lista
   },
   item: {
-    fontSize: 18,         // tamanho do texto de cada item da lista
-    marginTop: 10         // espaço entre os itens
+    fontSize: 18,     // tamanho do texto dos itens
+    marginVertical: 5 // espaço entre itens
   }
 });
