@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  ScrollView,
-  StyleSheet
+  View,         // Contêiner básico para layouts; substitui <div> do web
+  Text,         // Componente para exibir textos; substitui <p> ou <span>
+  TextInput,    // Campo de entrada de texto controlado
+  Button,       // Botão nativo simples com título
+  ScrollView,   // Área rolável que permite exibir listas ou conteúdo longo
+  StyleSheet    // API para criar objetos de estilo (semelhante a CSS)
 } from 'react-native';
 
 export default function App() {
