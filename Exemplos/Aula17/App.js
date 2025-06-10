@@ -47,7 +47,7 @@ export default function App() {
       {/* 8. Lista rolável de contatos */}
       <ScrollView style={styles.lista}>
         {contatos.map(contato => (
-          <Text key={contato.id} style={styles.item}>
+          <Text key={contato.id} style={styles.item}>    // cada item precisa de chave única para o React rastrear as atualizações
             {/* 8.1. Exibe ID e nome */}
             {contato.id} - {contato.nome}
           </Text>
